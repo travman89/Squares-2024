@@ -10,6 +10,7 @@ import row8 from "./data/row8.json";
 import row9 from "./data/row9.json";
 import row10 from "./data/row10.json";
 import topRow from "./data/topRow.json";
+import React from "react";
 
 function App() {
   return (
@@ -18,9 +19,9 @@ function App() {
         Rotate device or widen your browser window
       </p>
       <p className="rotateMessage">Good Luck!</p>
-      <div className="niners">San Francisco</div>
+      <div className="team1">Team 1</div>
       <div className="boardContainer">
-        <div className="chiefs">Kansas City</div>
+        <div className="team2">Team 2</div>
         <div className="topRow">
           {topRow.map((box, i) => (
             <div key={`top row column ${i}`}>{box?.text}</div>

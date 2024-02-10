@@ -1,6 +1,6 @@
 # Super Bowl Squares Board
 
-## This is a simple react app for creating a superbowl squares board.
+This is a simple react app for creating a superbowl squares board.
 
 ## Running the project
 
@@ -19,3 +19,12 @@ Change the fields in the .json files inside the `data` directory. You can shape 
 ## Styling
 
 This project isn't using any library, just plain old css. Most styling you'll have to do is in `App.css`.
+
+## Potential Future Work
+
+- Board auto generator from an input file
+- Settings file
+- Scoreboard with winner highlights
+- On hover show winning numbers
+- How to play link
+- Refactor the json file structure and rendering.

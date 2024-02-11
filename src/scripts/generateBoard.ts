@@ -13,7 +13,7 @@ const generateBoard = () => {
   generateTopRow();
   for (let i = 0; i < 10; i++) {
     generateRow(
-      i,
+      i + 1,
       randomRowScores[i].text,
       playerArray.slice(i * 10, 10 * i + 10)
     );

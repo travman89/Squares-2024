@@ -85,7 +85,7 @@ const randomNumberArray = (): RowArrayEntry[] => {
 const generateTopRow = () => {
   let rowArray = [{ text: "" }];
   rowArray = rowArray.concat(randomNumberArray());
-  writeFile(__dirname.replace("scripts", `topRow.json`), rowArray);
+  writeFile(__dirname.replace("scripts", `data/topRow.json`), rowArray);
 };
 
 const generateRow = (

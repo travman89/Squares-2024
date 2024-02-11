@@ -1,6 +1,6 @@
 {
-  "team1": "Kansas City",
-  "team2": "San Francisco",
+  "team1": "Team 1",
+  "team2": "Team 2",
   "players": [
     { "name": "player 1", "squares": 20 },
     { "name": "player 2", "squares": 18 },

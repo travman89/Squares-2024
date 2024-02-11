@@ -12,9 +12,13 @@ navigate in your browser to `http://localhost:5173/`
 
 ## Populating the board
 
-Change the fields in the .json files inside the `data` directory. You can shape this however you want, but by default each row is in its own file to limit mistakes.
+Fill out `settings.json` with the data of your players, and the teams in the game.
 
-`topRow.json` has a blank firs entry to keep the top left corner blank.
+Run `yarn board-gen`, and the script will take your data from `settings.json` and generate your board with randomly assigned player squares and numbers for the teams playing.
+
+You can manually edit each of the row json files if you want to assign speccific squares to your players
+
+`topRow.json` has a blank first entry to keep the top left corner blank.
 
 ## Styling
 

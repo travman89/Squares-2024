@@ -1,0 +1,11 @@
+{
+  "team1": "Kansas City",
+  "team2": "San Francisco",
+  "players": [
+    { "name": "player 1", "squares": 20 },
+    { "name": "player 2", "squares": 18 },
+    { "name": "player 3", "squares": 22 },
+    { "name": "player 4", "squares": 27 },
+    { "name": "player 5", "squares": 13 }
+  ]
+}

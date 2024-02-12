@@ -18,18 +18,19 @@ const exit = () => {
 };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const randomizeArray = (array: any): any[] => {
+  const newArray = [...array];
   let currentIndex = array.length,
     randomIndex;
 
   while (currentIndex > 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
+    [newArray[currentIndex], newArray[randomIndex]] = [
+      newArray[randomIndex],
+      newArray[currentIndex],
     ];
   }
-  return array;
+  return newArray;
 };
 
 const shuffle = (array: Player[]) => {
@@ -118,4 +119,5 @@ export {
   formatPlayerArray,
   randomNumberArray,
   generateRow,
+  randomizeArray,
 };

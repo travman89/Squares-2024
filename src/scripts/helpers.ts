@@ -103,6 +103,7 @@ const generateRow = (
 }
 
 const writeFile = (fileName: string, rowArray: RowArrayEntry[]) => {
+  const formattedString = fileName.split("/")
   fs.writeFile(fileName, JSON.stringify(rowArray), (err) => {
     if (err) {
       console.error(`Error writing file: ${fileName}`, err)
@@ -112,6 +113,15 @@ const writeFile = (fileName: string, rowArray: RowArrayEntry[]) => {
     }
   })
 }
+
+const getNiceFileName = (fileName: string): string => {
+  const directoryArray = fileName.split("/")
+  if (directoryArray.length >= 2) {
+    return directoryArray.slice(-2).join("/")
+  }
+  return fileName
+}
+
 export {
   shuffle,
   verifySquareCount,
@@ -121,4 +131,6 @@ export {
   generateRow,
   randomizeArray,
   buildSquareArray,
+  writeFile,
+  getNiceFileName,
 }

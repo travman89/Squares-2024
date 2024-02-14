@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { expect, describe, it, vi } from "vitest"
+import { expect, describe, it, vi, afterEach } from "vitest"
+import fs from "fs"
+
 import {
   randomizeArray,
   verifySquareCount,
@@ -8,6 +10,9 @@ import {
   Player,
   formatPlayerArray,
   randomNumberArray,
+  writeFile,
+  generateTopRow,
+  getNiceFileName,
 } from "../helpers"
 
 describe("randomizeArray tests", () => {
@@ -178,5 +183,111 @@ describe("randomNumberArray tests", () => {
       { text: "9" },
     ]
     expect(randomArray).not.toEqual(comparisonArray)
+  })
+})
+
+describe("writeFile function", () => {
+  afterEach(() => {
+    vi.clearAllMocks()
+  })
+
+  it("should successfully write the file", () => {
+    const fileName = "testFile.json"
+    const rowArray = [{ text: "1" }, { text: "2" }]
+    const writeFileMock = vi
+      .spyOn(fs, "writeFile")
+      .mockImplementation((file, data, callback) => {
+        callback(null)
+      })
+    const consoleLogSpy = vi.spyOn(console, "log").mockImplementation(vi.fn())
+
+    writeFile(fileName, rowArray)
+
+    expect(writeFileMock).toHaveBeenCalledWith(
+      fileName,
+      JSON.stringify(rowArray),
+      expect.any(Function)
+    )
+    expect(consoleLogSpy).toHaveBeenCalledWith(
+      `Successfully wrote file ${fileName}.`
+    )
+  })
+
+  it("should handle error when writing the file", () => {
+    const fileName = "testFile.json"
+    const rowArray = [{ text: "1" }, { text: "2" }]
+    const error = new Error("Error writing file: testFile.json")
+    const writeFileMock = vi
+      .spyOn(fs, "writeFile")
+      .mockImplementation((file, data, callback) => {
+        callback(error)
+      })
+    const consoleErrorSpy = vi
+      .spyOn(console, "error")
+      .mockImplementation(vi.fn())
+    const exitMock = vi.spyOn(process, "exit").mockImplementation(vi.fn())
+
+    writeFile(fileName, rowArray)
+
+    expect(writeFileMock).toHaveBeenCalledWith(
+      fileName,
+      JSON.stringify(rowArray),
+      expect.any(Function)
+    )
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      `Error writing file: ${fileName}`,
+      error
+    )
+    expect(exitMock).toHaveBeenCalled()
+  })
+})
+
+// describe("generateTopRow test", () => {
+//   const writeFileMock = vi
+//     .spyOn(fs, "writeFile")
+//     .mockImplementation((file, data, callback) => {
+//       callback(null)
+//     })
+//   const consoleLogSpy = vi.spyOn(console, "log").mockImplementation(vi.fn())
+//   generateTopRow()
+//   expect(writeFileMock).toHaveBeenCalledWith(
+//     expect.any(String),
+//     expect.any(String),
+//     expect.any(Function)
+//   )
+//   expect(consoleLogSpy).toHaveBeenCalledWith(
+//     `Successfully wrote file data/topRow.json`
+//   )
+// })
+
+describe("getNiceFileName function", () => {
+  it("should return the last two parts of the file path separated by a comma if the file path contains directories", () => {
+    const fileName = "path/to/some/file.txt"
+    const niceFileName = getNiceFileName(fileName)
+    expect(niceFileName).toBe("some/file.txt")
+  })
+
+  it("should return the same file name if the file path does not contain directories", () => {
+    const fileName = "file.txt"
+    const niceFileName = getNiceFileName(fileName)
+    expect(niceFileName).toBe("file.txt")
+  })
+
+  it("should return the same file name if the file path contains only one directory", () => {
+    const fileName = "path/file.txt"
+    const niceFileName = getNiceFileName(fileName)
+    expect(niceFileName).toBe("path/file.txt")
+  })
+
+  it("should return the same file name if the file path is empty", () => {
+    const fileName = ""
+    const niceFileName = getNiceFileName(fileName)
+    expect(niceFileName).toBe("")
+  })
+
+  it("should return the same file name if the file path is a single character", () => {
+    const fileName = "f"
+    const niceFileName = getNiceFileName(fileName)
+    expect(niceFileName).toBe("f")
   })
 })

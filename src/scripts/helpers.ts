@@ -1,72 +1,73 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import fs from "fs"
+import path from "path"
+import { fileURLToPath } from "url"
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export type Player = {
-  name: string;
-  squares: number;
-};
+  name: string
+  squares: number
+}
 
 export type RowArrayEntry = {
-  text: string;
-};
+  text: string
+}
 
 const exit = () => {
-  console.error("\n\n Game board generation failed.\n\n");
-  process.exit(0);
-};
+  console.error("\n\n Game board generation failed.\n\n")
+  process.exit(0)
+}
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const randomizeArray = (array: any): any[] => {
+  const newArray = [...array]
   let currentIndex = array.length,
-    randomIndex;
+    randomIndex
 
   while (currentIndex > 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex--
+    ;[newArray[currentIndex], newArray[randomIndex]] = [
+      newArray[randomIndex],
+      newArray[currentIndex],
+    ]
   }
-  return array;
-};
+  return newArray
+}
 
 const shuffle = (array: Player[]) => {
   if (verifySquareCount(array)) {
-    const squareArray = randomizeArray(bulidSquareArray(array)) as string[];
-    return squareArray;
+    const squareArray = randomizeArray(buildSquareArray(array)) as string[]
+    return squareArray
   }
-};
+}
 
 const verifySquareCount = (players: Player[]): boolean => {
-  let squareCount = 0;
+  let squareCount = 0
   for (let i = 0; i < players.length; i++) {
-    squareCount += players[i].squares;
+    squareCount += players[i].squares
   }
   if (squareCount === 100) {
-    return true;
+    return true
   }
   console.error(
     `Only ${squareCount} squares found in the player list. Fill the board with 100 to generate it.`
-  );
-  exit();
-  return false;
-};
+  )
+  exit()
+  return false
+}
 
-const bulidSquareArray = (players: Player[]): string[] => {
-  const squareArray = [] as string[];
+const buildSquareArray = (players: Player[]): string[] => {
+  const squareArray = [] as string[]
   for (let i = 0; i < players.length; i++) {
     for (let j = 0; j < players[i].squares; j++) {
-      squareArray.push(players[i].name);
+      squareArray.push(players[i].name)
     }
   }
-  return squareArray;
-};
+  return squareArray
+}
 
 const formatPlayerArray = (playerArray: string[]): RowArrayEntry[] => {
-  return playerArray.map((player) => ({ text: player }));
-};
+  return playerArray.map((player) => ({ text: player }))
+}
 const randomNumberArray = (): RowArrayEntry[] => {
   return randomizeArray([
     { text: "0" },
@@ -79,38 +80,48 @@ const randomNumberArray = (): RowArrayEntry[] => {
     { text: "7" },
     { text: "8" },
     { text: "9" },
-  ]);
-};
+  ])
+}
 
 const generateTopRow = () => {
-  let rowArray = [{ text: "" }];
-  rowArray = rowArray.concat(randomNumberArray());
-  writeFile(__dirname.replace("scripts", `data/topRow.json`), rowArray);
-};
+  let rowArray = [{ text: "" }]
+  rowArray = rowArray.concat(randomNumberArray())
+  writeFile(__dirname.replace("scripts", `data/topRow.json`), rowArray)
+}
 
 const generateRow = (
   rowIndex: number,
   rowStart: string,
   rowArray: RowArrayEntry[]
 ) => {
-  let formattedRowArray = [{ text: rowStart }];
-  formattedRowArray = formattedRowArray.concat(rowArray);
+  let formattedRowArray = [{ text: rowStart }]
+  formattedRowArray = formattedRowArray.concat(rowArray)
   writeFile(
     __dirname.replace("scripts", `data/row${rowIndex}.json`),
     formattedRowArray
-  );
-};
+  )
+}
 
 const writeFile = (fileName: string, rowArray: RowArrayEntry[]) => {
+  const formattedString = getNiceFileName(fileName)
   fs.writeFile(fileName, JSON.stringify(rowArray), (err) => {
     if (err) {
-      console.error(`Error writing file: ${fileName}`, err);
-      exit();
+      console.error(`Error writing file: ${formattedString}`, err)
+      exit()
     } else {
-      console.log(`Successfully wrote file ${fileName}.`);
+      console.log(`Successfully wrote file ${formattedString}.`)
     }
-  });
-};
+  })
+}
+
+const getNiceFileName = (fileName: string): string => {
+  const directoryArray = fileName.split("/")
+  if (directoryArray.length >= 2) {
+    return directoryArray.slice(-2).join("/")
+  }
+  return fileName
+}
+
 export {
   shuffle,
   verifySquareCount,
@@ -118,4 +129,8 @@ export {
   formatPlayerArray,
   randomNumberArray,
   generateRow,
-};
+  randomizeArray,
+  buildSquareArray,
+  writeFile,
+  getNiceFileName,
+}

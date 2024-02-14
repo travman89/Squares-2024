@@ -13,6 +13,7 @@ import {
   writeFile,
   generateTopRow,
   getNiceFileName,
+  generateRow,
 } from "../helpers"
 
 describe("randomizeArray tests", () => {
@@ -242,23 +243,45 @@ describe("writeFile function", () => {
   })
 })
 
-// describe("generateTopRow test", () => {
-//   const writeFileMock = vi
-//     .spyOn(fs, "writeFile")
-//     .mockImplementation((file, data, callback) => {
-//       callback(null)
-//     })
-//   const consoleLogSpy = vi.spyOn(console, "log").mockImplementation(vi.fn())
-//   generateTopRow()
-//   expect(writeFileMock).toHaveBeenCalledWith(
-//     expect.any(String),
-//     expect.any(String),
-//     expect.any(Function)
-//   )
-//   expect(consoleLogSpy).toHaveBeenCalledWith(
-//     `Successfully wrote file data/topRow.json`
-//   )
-// })
+describe("generateTopRow test", () => {
+  it("should successfully generate a topRow File", () => {
+    const writeFileMock = vi
+      .spyOn(fs, "writeFile")
+      .mockImplementation((file, data, callback) => {
+        callback(null)
+      })
+    const consoleLogSpy = vi.spyOn(console, "log").mockImplementation(vi.fn())
+    generateTopRow()
+    expect(writeFileMock).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.any(String),
+      expect.any(Function)
+    )
+    expect(consoleLogSpy).toHaveBeenCalledWith(
+      `Successfully wrote file data/topRow.json.`
+    )
+  })
+})
+
+describe("generateRow tests", () => {
+  it("should successfully generate a row File", () => {
+    const writeFileMock = vi
+      .spyOn(fs, "writeFile")
+      .mockImplementation((file, data, callback) => {
+        callback(null)
+      })
+    const consoleLogSpy = vi.spyOn(console, "log").mockImplementation(vi.fn())
+    generateRow(1, "3", [{ text: "1" }])
+    expect(writeFileMock).toHaveBeenCalledWith(
+      expect.any(String),
+      JSON.stringify([{ text: "3" }, { text: "1" }]),
+      expect.any(Function)
+    )
+    expect(consoleLogSpy).toHaveBeenCalledWith(
+      `Successfully wrote file data/row1.json.`
+    )
+  })
+})
 
 describe("getNiceFileName function", () => {
   it("should return the last two parts of the file path separated by a comma if the file path contains directories", () => {

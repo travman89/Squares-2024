@@ -103,13 +103,13 @@ const generateRow = (
 }
 
 const writeFile = (fileName: string, rowArray: RowArrayEntry[]) => {
-  const formattedString = fileName.split("/")
+  const formattedString = getNiceFileName(fileName)
   fs.writeFile(fileName, JSON.stringify(rowArray), (err) => {
     if (err) {
-      console.error(`Error writing file: ${fileName}`, err)
+      console.error(`Error writing file: ${formattedString}`, err)
       exit()
     } else {
-      console.log(`Successfully wrote file ${fileName}.`)
+      console.log(`Successfully wrote file ${formattedString}.`)
     }
   })
 }

@@ -7,6 +7,7 @@ import {
   shuffle,
   Player,
   formatPlayerArray,
+  randomNumberArray,
 } from "../helpers"
 
 describe("randomizeArray tests", () => {
@@ -158,5 +159,24 @@ describe("formatPlayerArray tests", () => {
       { text: "b" },
       { text: "c" },
     ])
+  })
+})
+
+describe("randomNumberArray tests", () => {
+  it("randomNumberArray should return an array with entries 0-9 randomized", () => {
+    const randomArray = randomNumberArray()
+    const comparisonArray = [
+      { text: "0" },
+      { text: "1" },
+      { text: "2" },
+      { text: "3" },
+      { text: "4" },
+      { text: "5" },
+      { text: "6" },
+      { text: "7" },
+      { text: "8" },
+      { text: "9" },
+    ]
+    expect(randomArray).not.toEqual(comparisonArray)
   })
 })

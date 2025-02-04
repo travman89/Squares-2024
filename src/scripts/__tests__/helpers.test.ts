@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// @ts-nocheck
 import { expect, describe, it, vi, afterEach } from "vitest"
 import fs from "fs"
 

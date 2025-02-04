@@ -1,17 +1,16 @@
-import "./App.css";
-import row1 from "./data/row1.json";
-import row2 from "./data/row2.json";
-import row3 from "./data/row3.json";
-import row4 from "./data/row4.json";
-import row5 from "./data/row5.json";
-import row6 from "./data/row6.json";
-import row7 from "./data/row7.json";
-import row8 from "./data/row8.json";
-import row9 from "./data/row9.json";
-import row10 from "./data/row10.json";
-import topRow from "./data/topRow.json";
-import settings from "./settings.json";
-import React from "react";
+import "./App.css"
+import row1 from "./data/row1.json"
+import row2 from "./data/row2.json"
+import row3 from "./data/row3.json"
+import row4 from "./data/row4.json"
+import row5 from "./data/row5.json"
+import row6 from "./data/row6.json"
+import row7 from "./data/row7.json"
+import row8 from "./data/row8.json"
+import row9 from "./data/row9.json"
+import row10 from "./data/row10.json"
+import topRow from "./data/topRow.json"
+import settings from "./settings.json"
 function App() {
   return (
     <>
@@ -100,7 +99,7 @@ function App() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

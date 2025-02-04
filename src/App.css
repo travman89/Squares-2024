@@ -67,7 +67,7 @@
   }
 }
 
-.chiefs{
+.team1{
   margin:2vh auto 2vh;
   font-size: 8vh;
   line-height:8vh;
@@ -75,7 +75,7 @@
   color: #E31837;
 }
 
-.niners{
+.team2{
   font-size: 8vh;
   line-height:8vh;
   font-weight: 600;
@@ -83,8 +83,9 @@
   position: absolute;
   writing-mode: vertical-lr;
   transform: rotate(180deg);
-  top: 25vh;
-  left: 5vw;
+  top: 0;
+  bottom: 0;
+  left: calc(7vw - 4vh);
 }
 
 .rotateMessage {
@@ -98,6 +99,9 @@
     display: none;
   }
   .niners{
+    display: none;
+  }
+  .team1 {
     display: none;
   }
 }

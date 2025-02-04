@@ -35,11 +35,12 @@
   white-space: break-spaces;
   word-wrap: break-word;
   font-size: 1.75vh;
+  font-weight: bold;
   box-sizing: border-box;
   display: grid;
 	align-items: center;
   overflow: hidden;
-  background-color: #EEEEEE;
+  background-color: #fff;
 }
 
 .topRow{
@@ -79,7 +80,7 @@
   font-size: 8vh;
   line-height:8vh;
   font-weight: 600;
-  color: #B3995D;
+  color: #004C54;
   position: absolute;
   writing-mode: vertical-lr;
   transform: rotate(180deg);

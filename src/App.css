@@ -83,8 +83,9 @@
   position: absolute;
   writing-mode: vertical-lr;
   transform: rotate(180deg);
-  top: 25vh;
-  left: 5vw;
+  top: 0;
+  bottom: 0;
+  left: calc(7vw - 4vh);
 }
 
 .rotateMessage {
@@ -98,6 +99,9 @@
     display: none;
   }
   .niners{
+    display: none;
+  }
+  .team1 {
     display: none;
   }
 }

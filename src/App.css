@@ -46,6 +46,7 @@
 .topRow{
   display: flex;
   flex-direction: row;
+  font-weight: bold;
   > div{
     box-sizing: border-box;
     background-color: #888888;
